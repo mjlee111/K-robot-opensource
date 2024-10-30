@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QComboBox>
 #include <QDialog>
+#include <QLabel>
 #include <QList>
 #include <QPushButton>
 #include <QRect>
@@ -14,11 +15,21 @@ int main(int argc, char * argv[])
   QApplication a(argc, argv);
 
   QDialog screenSelectDialog;
-  screenSelectDialog.setWindowTitle("Select Display");
+  screenSelectDialog.setWindowTitle("디스플레이 설정");
 
   QVBoxLayout * layout = new QVBoxLayout(&screenSelectDialog);
+
+  QLabel * screenLabel = new QLabel("디스플레이 선택:");
   QComboBox * screenCombo = new QComboBox();
-  QPushButton * okButton = new QPushButton("OK");
+
+  QLabel * sizeLabel = new QLabel("화면 크기:");
+  QComboBox * sizeCombo = new QComboBox();
+  sizeCombo->addItem("전체 화면", 100);
+  sizeCombo->addItem("80%", 80);
+  sizeCombo->addItem("60%", 60);
+  sizeCombo->addItem("40%", 40);
+  sizeCombo->setCurrentIndex(1);
+  QPushButton * okButton = new QPushButton("확인");
 
   QList<QScreen *> screens = QGuiApplication::screens();
   int selectedScreen = 0;
@@ -32,21 +43,26 @@ int main(int argc, char * argv[])
     screenCombo->addItem(screenInfo, i);
   }
 
+  layout->addWidget(screenLabel);
   layout->addWidget(screenCombo);
+  layout->addWidget(sizeLabel);
+  layout->addWidget(sizeCombo);
   layout->addWidget(okButton);
 
   QObject::connect(okButton, &QPushButton::clicked, &screenSelectDialog, &QDialog::accept);
 
+  int screenSize = 80;
   if (screenSelectDialog.exec() == QDialog::Accepted) {
     selectedScreen = screenCombo->currentData().toInt();
+    screenSize = sizeCombo->currentData().toInt();
   }
 
   QScreen * selectedDisplay = screens[selectedScreen];
   QRect screenGeometry = selectedDisplay->geometry();
 
   MainWindow w;
-  int width = screenGeometry.width() * 0.8;
-  int height = screenGeometry.height() * 0.8;
+  int width = screenGeometry.width() * screenSize / 100;
+  int height = screenGeometry.height() * screenSize / 100;
 
   w.setFixedSize(width, height);
   w.show();
