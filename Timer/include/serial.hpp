@@ -22,7 +22,8 @@ public:
 
   QSerialPort * serial;
   QByteArray buffer;
-signals:
+
+Q_SIGNALS:
   void dataReceived();
 
 public slots:

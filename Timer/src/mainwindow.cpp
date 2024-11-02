@@ -8,11 +8,17 @@ MainWindow::MainWindow(QWidget * parent)
   QIcon icon(":/image/images/icon.png");
   setWindowIcon(icon);
 
+  QPixmap logo(":/image/images/logo.png");
+  logo = logo.scaled(ui->logo->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  ui->logo->setPixmap(logo);
+
   initializeSerial();
   timerSetDialog(msec, sec, min);
 
   timerType = TimerType::stopwatch;
   ui->modeLabel->setText("Stopwatch");
+
+  QObject::connect(serial, SIGNAL(dataReceived()), this, SLOT(handleDataReceived()));
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +31,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initializeSerial()
 {
+  ui->deviceList->clear();
   QStringList portNames = serial->getPortNames();
   ui->deviceList->addItems(portNames);
 }
@@ -48,6 +55,7 @@ void MainWindow::on_connectBtn_clicked()
   if (isOpen) {
     disconnect(serial->serial, &QSerialPort::readyRead, serial, &Serial::readDevice);
 
+    serial->closePort();
     ui->deviceList->setEnabled(true);
     ui->connectBtn->setText("Connect");
     ui->connectBtn->setStyleSheet("color: rgb(255, 0, 0);");
@@ -247,5 +255,37 @@ void MainWindow::on_resetBtn_clicked()
       msec = last_msec;
       timerSetDialog(msec, sec, min);
     }
+  }
+}
+
+void MainWindow::on_searchBtn_clicked()
+{
+  initializeSerial();
+}
+
+void MainWindow::handleDataReceived()
+{
+  ui->rxDataLabel->clear();
+  QByteArray buffer = serial->buffer;
+  QString data = QString(buffer);
+
+  // std::cout << "Raw data length: " << data.length() << std::endl;
+  // std::cout << "Raw data bytes: ";
+  // for (int i = 0; i < data.length(); i++) {
+  //   std::cout << QString::number(data[i].unicode(), 16).toStdString() << " ";
+  // }
+  // std::cout << std::endl;
+
+  data = data.trimmed();
+
+  if (data.startsWith("##") && data.endsWith("FF")) {
+    QString command = data.mid(2, data.length() - 4);
+    ui->rxDataLabel->setText(data);
+    // std::cout << "Valid data received: " << data.toStdString() << std::endl;
+  } else {
+    ui->rxDataLabel->setText("Invalid packet");
+    // std::cout << "Invalid packet: " << data.toStdString() << std::endl;
+    // std::cout << "Starts with ##: " << data.startsWith("##") << std::endl;
+    // std::cout << "Ends with FF: " << data.endsWith("FF") << std::endl;
   }
 }

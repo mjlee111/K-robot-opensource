@@ -60,8 +60,14 @@ void Serial::closePort()
 
 void Serial::readDevice()
 {
+  if (serial->canReadLine()) {
+    buffer.clear();
+    buffer.append(serial->readLine());
+    Q_EMIT dataReceived();
+  }
 }
 
 void Serial::writeDevice(const QByteArray & data)
 {
+  serial->write(data);
 }

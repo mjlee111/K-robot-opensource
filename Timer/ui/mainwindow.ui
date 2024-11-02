@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>480</height>
+    <height>514</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,32 +19,10 @@ color: rgb(255, 255, 255)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="1">
-     <widget class="QLCDNumber" name="secLCD"/>
-    </item>
-    <item row="3" column="2">
-     <widget class="QLCDNumber" name="msecLCD"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="servoInitBtn">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
+    <item row="4" column="2">
+     <widget class="QPushButton" name="resetBtn">
       <property name="text">
-       <string>Servo Init</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0" colspan="3">
-     <widget class="QLabel" name="logoLabel">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string> ©github.com.mjlee111/K-robot-opensource</string>
+       <string>Reset</string>
       </property>
      </widget>
     </item>
@@ -55,10 +33,13 @@ color: rgb(255, 255, 255)</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="startBtn">
-      <property name="text">
-       <string>Start</string>
+    <item row="3" column="0">
+     <widget class="QLCDNumber" name="minLCD">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
      </widget>
     </item>
@@ -73,30 +54,26 @@ color: rgb(255, 255, 255)</string>
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>10</height>
+        <height>25</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>20</height>
+        <height>30</height>
        </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
       </property>
       <property name="text">
        <string>⚠️아두이노의 보드레이트는 115200으로 설정되어 있어야 합니다⚠️</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="deviceResetBtn">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Arduino Reset</string>
       </property>
      </widget>
     </item>
@@ -107,6 +84,16 @@ color: rgb(255, 255, 255)</string>
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="deviceResetBtn">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Arduino Reset</string>
       </property>
      </widget>
     </item>
@@ -121,27 +108,44 @@ color: rgb(255, 255, 255)</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QLCDNumber" name="minLCD"/>
-    </item>
-    <item row="4" column="2">
-     <widget class="QPushButton" name="resetBtn">
+    <item row="8" column="0" colspan="3">
+     <widget class="QLabel" name="logoLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
       <property name="text">
-       <string>Reset</string>
+       <string> ©github.com.mjlee111/K-robot-opensource</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="timerSetBtn">
-      <property name="text">
-       <string>Timer Mode</string>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="servoInitBtn">
+      <property name="enabled">
+       <bool>false</bool>
       </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="stopwatchBtn">
       <property name="text">
-       <string>Stopwatch Mode</string>
+       <string>Servo Init</string>
       </property>
      </widget>
     </item>
@@ -158,6 +162,105 @@ color: rgb(255, 255, 255)</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLCDNumber" name="msecLCD">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="searchBtn">
+      <property name="text">
+       <string>Device Search</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="stopwatchBtn">
+      <property name="text">
+       <string>Stopwatch Mode</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLCDNumber" name="secLCD">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="startBtn">
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="timerSetBtn">
+      <property name="text">
+       <string>Timer Mode</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1" colspan="2">
+     <widget class="QLabel" name="rxDataLabel">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="label">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="text">
+       <string>RAW DATA</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLabel" name="logo">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

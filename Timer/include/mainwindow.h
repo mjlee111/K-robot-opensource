@@ -33,7 +33,7 @@ public:
 
   enum TimerType { timer, stopwatch };
 
-private slots:
+public Q_SLOTS:
   void on_deviceList_currentIndexChanged(int index);
   void on_connectBtn_clicked();
   void on_deviceResetBtn_clicked();
@@ -43,6 +43,9 @@ private slots:
   void on_startBtn_clicked();
   void timerUpdate();
   void on_resetBtn_clicked();
+  void on_searchBtn_clicked();
+
+  void handleDataReceived();
 
 private:
   Ui::MainWindow * ui;
