@@ -7,7 +7,7 @@
 ## 빠른 시작
 
 **1. [회로도](K-robot-circuit-Schematic.pdf)** <br>
-**2. [타이머 프로그램](K-robot-main.exe)** <br>
+**2. [타이머 프로그램](https://github.com/mjlee111/K-robot-opensource/releases/download/v1.0/Windows_Qt_6_8_0_MinGW_64_bit-Release.zip)** <br>
 **3. [아두이노 소스 코드](Arduino/K-robot/K-robot.ino)** <br>
 
 ## 회로 사용방법
