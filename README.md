@@ -33,7 +33,7 @@
 <br>
 - 회로 포트
 
-![회로 포트](docs/PCB_port.png)
+![회로 포트](docs/PCB_Port.png)
 ---
 <br>
 - 회로 포트 설명
