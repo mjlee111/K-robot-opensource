@@ -67,5 +67,7 @@ private:
 
   QString device_name;
   bool isOpen = false;
+
+  bool isModeSet = false;
 };
 #endif  // MAINWINDOW_H
