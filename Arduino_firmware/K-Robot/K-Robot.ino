@@ -8,7 +8,6 @@
 
 Mode current_mode;
 
-int angle = 0;
 bool timerOn = false;
 
 void setup() {
@@ -67,6 +66,40 @@ void loop() {
   } else if (current_mode == RobotShooting) {
 
   } else if (current_mode == MissionCreate) {
+  }
+
+  String commandRead = readPacket();
+  if (commandRead == "RESET") {
+    timerOn = false;
+    current_mode = getMode();
+    delay(100);
+
+    if (current_mode == ModeError) {
+      sendPacket("MODE_ERROR");
+      return;
+    } else if (current_mode == DEBUG) {
+      sendPacket("DEBUG");
+    } else if (current_mode == RobotShooting) {
+      sendPacket("ROBOT_SHOOTING");
+    } else if (current_mode == MissionCreate) {
+      sendPacket("MISSION_CREATE");
+    } else if (current_mode == Maze) {
+      sendPacket("MAZE");
+    } else if (current_mode == BlockLow) {
+      sendPacket("BLOCK_LOW");
+    } else if (current_mode == BlockHigh) {
+      sendPacket("BLOCK_HIGH");
+    }
+
+    for (int i = 0; i < 4; i++) {
+      setAngle(i, 0);
+    }
+    delay(100);
+  } else if (commandRead == "SERVO") {
+    for (int i = 0; i < 4; i++) {
+      setAngle(i, 0);
+    }
+    delay(100);
   }
 
   delay(1);
