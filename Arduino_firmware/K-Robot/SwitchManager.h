@@ -13,7 +13,7 @@ void updateSwitch();
 
 void initializeSwitch() {
   pinMode(SWITCH1_PIN, INPUT_PULLUP);
-  s pinMode(SWITCH2_PIN, INPUT_PULLUP);
+  pinMode(SWITCH2_PIN, INPUT_PULLUP);
   pinMode(SWITCH3_PIN, INPUT_PULLUP);
 }
 
