@@ -8,6 +8,8 @@
 
 Mode current_mode;
 
+int angle = 0;
+
 void setup()
 {
   initializeSerial();
@@ -41,7 +43,8 @@ void setup()
 
 void loop()
 {
-  getMode();
+  setAngle(0, angle);
+  angle++;
   updateADC();
   updateSwitch();
   delay(500);
