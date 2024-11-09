@@ -60,7 +60,7 @@ void loop() {
   if (current_mode == BlockHigh) {
     // 차단바
     if (PSD_DETECTED[1] && timerOn) {
-      delay(ADC_v[4] / 10); // 랜덤시간 delay
+      delay(ADC_v[3]); // 랜덤시간 delay
       setAngle(0, -90);
     }
   } else if (current_mode == RobotShooting) {
