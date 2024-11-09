@@ -17,19 +17,19 @@
 
 - 부품 목록
 
-| 소자명                               | 개수 | 가격 [₩] (VAT included) | 구매링크                                                                                     |
+| 소자명                               | 개수 | 가격 (VAT included) | 구매링크                                                                                     |
 |--------------------------------------|------|-------------------------|---------------------------------------------------------------------------------------------|
-| 아두이노 나노 호환보드 FT232RL [SZH-EK017] | 1    | 7700                    | [link](https://www.devicemart.co.kr/goods/view?no=1265700)                                  |
-| C2012-104K(100nF)-50V                | 9    | 7                       | [link](https://www.devicemart.co.kr/goods/view?no=3516)                                     |
-| Hongxing WIW3386P(8mm shaft) Series-10KΩ | 3    | 825                     | [link](https://www.devicemart.co.kr/goods/view?no=37689)                                    |
-| 핀헤더소켓 Single 1x15 Straight(2.54mm)  | 2    | 200                     | [link](https://www.devicemart.co.kr/goods/view?no=3585)                                     |
-| [MOLEX] 5267-03                      | 8    | 44                      | [link](https://www.devicemart.co.kr/goods/view?no=442)                                      |
-| [MOLEX] 5267-02                      | 3    | 33                      | [link](https://www.devicemart.co.kr/goods/view?no=417)                                      |
-| [MOLEX] 5267-04                      | 1    | 33                      | [link](https://www.devicemart.co.kr/goods/view?no=419)                                      |
-| MSL-1C2P(중) - 4mm                   | 1    | 165                     | [link](https://www.devicemart.co.kr/goods/view?no=38883)                                    |
-| 마이크로 택트 스위치 [NW3-A06-B3]      | 1    | 99                      | [link](https://www.devicemart.co.kr/goods/view?no=1322056)                                  |
-| XT-30 Female                         | 1    | 660                     | [link](https://www.devicemart.co.kr/goods/view?no=15229856)                                 |
-| KSD-05H                               | 1    | 572                     | [link](https://www.devicemart.co.kr/goods/view?no=1779)                                     |
+| 아두이노 나노 호환보드 FT232RL [SZH-EK017] | 1    | 7,700₩                    | [link](https://www.devicemart.co.kr/goods/view?no=1265700)                                  |
+| C2012-104K(100nF)-50V                | 9    | 7₩                       | [link](https://www.devicemart.co.kr/goods/view?no=3516)                                     |
+| Hongxing WIW3386P(8mm shaft) Series-10KΩ | 3    | 825₩                     | [link](https://www.devicemart.co.kr/goods/view?no=37689)                                    |
+| 핀헤더소켓 Single 1x15 Straight(2.54mm)  | 2    | 200₩                     | [link](https://www.devicemart.co.kr/goods/view?no=3585)                                     |
+| [MOLEX] 5267-03                      | 8    | 44₩                      | [link](https://www.devicemart.co.kr/goods/view?no=442)                                      |
+| [MOLEX] 5267-02                      | 3    | 33₩                      | [link](https://www.devicemart.co.kr/goods/view?no=417)                                      |
+| [MOLEX] 5267-04                      | 1    | 33₩                      | [link](https://www.devicemart.co.kr/goods/view?no=419)                                      |
+| MSL-1C2P(중) - 4mm                   | 1    | 165₩                     | [link](https://www.devicemart.co.kr/goods/view?no=38883)                                    |
+| 마이크로 택트 스위치 [NW3-A06-B3]      | 1    | 99₩                      | [link](https://www.devicemart.co.kr/goods/view?no=1322056)                                  |
+| XT-30 Female                         | 1    | 660₩                     | [link](https://www.devicemart.co.kr/goods/view?no=15229856)                                 |
+| KSD-05H                               | 1    | 572₩                     | [link](https://www.devicemart.co.kr/goods/view?no=1779)                                     |
 
 ---
 <br>
