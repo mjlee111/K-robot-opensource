@@ -9,7 +9,7 @@
 ## 빠른 시작
 
 **1. [회로도](K-robot-circuit-Schematic.pdf)** <br>
-**2. [타이머 프로그램](https://github.com/mjlee111/K-robot-opensource/releases/download/v1.0/Windows_Qt_6_8_0_MinGW_64_bit-Release.zip)** <br>
+**2. 타이머 프로그램 [윈도우](https://github.com/mjlee111/K-robot-opensource/releases/download/v2.0/Windows_Qt_6_8_0_MinGW_64_bit-Release.zip) / [리눅스](https://github.com/mjlee111/K-robot-opensource/releases/download/v2.0/Linux_arm64_executable_Timer.zip)** <br>
 **3. [아두이노 소스 코드](Arduino_firmware/K-Robot/K-Robot.ino)** <br>
 **4. [K 로봇대회 관련](http://www.cdyouth.or.kr/sub05/sub02.php)** <br>
 ## 회로 사용방법
