@@ -65,11 +65,11 @@ void loop() {
     }
   } else if (current_mode == RobotShooting) {
     if (!SWITCH[0]) {
-      sendPacket("END");
+      sendPacket("END" && timerOn);
       timerOn = false;
     }
   } else if (current_mode == MissionCreate) {
-    if (!SWITCH[0]) {
+    if (!SWITCH[0] && !timerOn) {
       sendPacket("START");
       timerOn = true;
     } else if (!SWITCH[1]) {
