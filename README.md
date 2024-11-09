@@ -1,4 +1,6 @@
+![LOGO](docs/center.png)
 # K-robot-open-source
+
 ## ⚠️ 주의 ⚠️
 - 이 레포지토리는 오픈소스 라이선스 CC BY-NC (Creative Commons Attribution-NonCommercial)를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참고하세요.
 - **상업적 이용을 엄격하게 금지합니다.**
@@ -9,7 +11,7 @@
 **1. [회로도](K-robot-circuit-Schematic.pdf)** <br>
 **2. [타이머 프로그램](https://github.com/mjlee111/K-robot-opensource/releases/download/v1.0/Windows_Qt_6_8_0_MinGW_64_bit-Release.zip)** <br>
 **3. [아두이노 소스 코드](Arduino_firmware/K-Robot/K-Robot.ino)** <br>
-
+**4. [K 로봇대회 관련](http://www.cdyouth.or.kr/sub05/sub02.php)** <br>
 ## 회로 사용방법
 계측기 회로의 경우 Arduino Nano를 사용합니다. 핀 배치 및 소자의 연결과 같은 경우 [K-robot-circuit-Schematic.pdf](K-robot-circuit-Schematic.pdf) 파일을 참고하세요.
 
