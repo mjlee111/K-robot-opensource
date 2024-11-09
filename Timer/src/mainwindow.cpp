@@ -217,6 +217,19 @@ void MainWindow::timerUpdate() {
         }
       }
     }
+    if (ui->arduinoMode->text() == "MISSION_CREATE") {
+      if (min == 0 && sec == 30 && msec == 0) {
+        QTimer::singleShot(0, this, []() {
+          QMessageBox::information(nullptr, "미션형 창작 알림",
+                                   "보너스 구역 개방!");
+        });
+        QByteArray packet;
+        packet.append("##");
+        packet.append("SERVO_MISSION"); // 미션형 창작 보너스 구역
+        packet.append("//");
+        serial->writeDevice(packet);
+      }
+    }
     timerSetDialog(msec, sec, min);
   } else if (timerType == TimerType::stopwatch) {
     msec++;
@@ -270,8 +283,9 @@ void MainWindow::handleDataReceived() {
   if (data.startsWith("##") && data.endsWith("FF")) {
     QString command = data.mid(2, data.length() - 4);
     if (!isModeSet) {
-      if (command == "MODE_ERROR" || command == "DEBUG" || command == "ROBOT_SHOOTING" ||
-          command == "MISSION_CREATE" || command == "MAZE" || command == "BLOCK_LOW" ||
+      if (command == "MODE_ERROR" || command == "DEBUG" ||
+          command == "ROBOT_SHOOTING" || command == "MISSION_CREATE" ||
+          command == "MAZE" || command == "BLOCK_LOW" ||
           command == "BLOCK_HIGH") {
         ui->arduinoMode->setText(command);
         isModeSet = true;
@@ -279,10 +293,9 @@ void MainWindow::handleDataReceived() {
         ui->arduinoMode->setText("Invalid Mode");
       }
     } else {
-        if(command == "START" || command == "END")
-        {
-            on_startBtn_clicked();
-        }
+      if (command == "START" || command == "END") {
+        on_startBtn_clicked();
+      }
       ui->rxDataLabel->setText(data);
     }
   } else {

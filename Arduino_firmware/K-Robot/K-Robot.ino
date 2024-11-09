@@ -39,7 +39,7 @@ void setup() {
   for (int i = 0; i < 4; i++) {
     setAngle(i, 0);
   }
-  delay(100);
+  delay(1000);
 }
 
 void loop() {
@@ -64,8 +64,18 @@ void loop() {
       setAngle(0, -90);
     }
   } else if (current_mode == RobotShooting) {
-
+    if (!SWITCH[0]) {
+      sendPacket("END");
+      timerOn = false;
+    }
   } else if (current_mode == MissionCreate) {
+    if (!SWITCH[0]) {
+      sendPacket("START");
+      timerOn = true;
+    } else if (!SWITCH[1]) {
+      setAngle(0, -90);
+      setAngle(1, -90);
+    }
   }
 
   String commandRead = readPacket();
@@ -99,6 +109,10 @@ void loop() {
     for (int i = 0; i < 4; i++) {
       setAngle(i, 0);
     }
+    delay(100);
+  } else if (commandRead == "SERVO_MISSION") {
+    setAngle(0, -90);
+    setAngle(1, -90);
     delay(100);
   }
 
