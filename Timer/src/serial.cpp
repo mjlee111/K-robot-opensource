@@ -60,9 +60,10 @@ void Serial::closePort()
 
 void Serial::readDevice()
 {
-  if (serial->canReadLine()) {
+
+  while(serial->canReadLine()) {
     buffer.clear();
-    buffer.append(serial->readLine());
+    buffer.push_back(serial->readLine());
     Q_EMIT dataReceived();
   }
 }
