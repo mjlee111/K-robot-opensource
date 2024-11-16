@@ -19,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
   timerType = TimerType::stopwatch;
   ui->modeLabel->setText("Stopwatch");
 
+
+  connect(serial->serial, &QSerialPort::readyRead, serial,
+          &Serial::readDevice);
+
   QObject::connect(serial, SIGNAL(dataReceived()), this,
                    SLOT(handleDataReceived()));
 }
@@ -50,8 +54,6 @@ void MainWindow::on_deviceList_currentIndexChanged(int index) {
 
 void MainWindow::on_connectBtn_clicked() {
   if (isOpen) {
-    disconnect(serial->serial, &QSerialPort::readyRead, serial,
-               &Serial::readDevice);
 
     serial->closePort();
     ui->deviceList->setEnabled(true);
@@ -78,8 +80,6 @@ void MainWindow::on_connectBtn_clicked() {
 
       isOpen = true;
 
-      connect(serial->serial, &QSerialPort::readyRead, serial,
-              &Serial::readDevice);
     } else {
       QMessageBox::critical(nullptr, "Device Status",
                             "Failed to open device: " +
@@ -274,31 +274,35 @@ void MainWindow::on_resetBtn_clicked() {
 void MainWindow::on_searchBtn_clicked() { initializeSerial(); }
 
 void MainWindow::handleDataReceived() {
-  ui->rxDataLabel->clear();
-  QByteArray buffer = serial->buffer;
-  QString data = QString(buffer);
+  for(int i=0;i<serial->buffer.size();i++)
+  {
+    ui->rxDataLabel->clear();
+    QByteArray buffer = serial->buffer[i];
+    QString data = QString(buffer);
 
-  data = data.trimmed();
+    data = data.trimmed();
 
-  if (data.startsWith("##") && data.endsWith("FF")) {
-    QString command = data.mid(2, data.length() - 4);
-    if (!isModeSet) {
-      if (command == "MODE_ERROR" || command == "DEBUG" ||
+    if (data.startsWith("##") && data.endsWith("FF")) {
+      QString command = data.mid(2, data.length() - 4);
+      if (!isModeSet) {
+        if (command == "MODE_ERROR" || command == "DEBUG" ||
           command == "ROBOT_SHOOTING" || command == "MISSION_CREATE" ||
           command == "MAZE" || command == "BLOCK_LOW" ||
           command == "BLOCK_HIGH") {
-        ui->arduinoMode->setText(command);
-        isModeSet = true;
+          ui->arduinoMode->setText(command);
+          isModeSet = true;
+        } else {
+          ui->arduinoMode->setText("Invalid Mode");
+        }
       } else {
-        ui->arduinoMode->setText("Invalid Mode");
+        if (command == "START" || command == "END") {
+          on_startBtn_clicked();
+        }
+        ui->rxDataLabel->setText(data);
       }
     } else {
-      if (command == "START" || command == "END") {
-        on_startBtn_clicked();
-      }
-      ui->rxDataLabel->setText(data);
+      ui->rxDataLabel->setText("Invalid packet");
     }
-  } else {
-    ui->rxDataLabel->setText("Invalid packet");
   }
+  serial->buffer.clear();
 }

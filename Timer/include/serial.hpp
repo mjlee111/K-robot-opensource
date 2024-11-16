@@ -7,6 +7,7 @@
 #include <QThread>
 #include <QTimer>
 #include <iostream>
+#include <vector>
 
 class Serial : public QObject
 {
@@ -21,7 +22,7 @@ public:
   void closePort();
 
   QSerialPort * serial;
-  QByteArray buffer;
+  std::vector<QByteArray> buffer;
 
 Q_SIGNALS:
   void dataReceived();
