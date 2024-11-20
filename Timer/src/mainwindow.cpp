@@ -1,5 +1,6 @@
 #include "./ui_mainwindow.h"
 #include "mainwindow.h"
+#include <chrono>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), serial(new Serial),
@@ -156,6 +157,7 @@ void MainWindow::on_timerSetBtn_clicked() {
       milliseconds *= 60000;
       break;
     }
+    target_ms=milliseconds;
 
     min = milliseconds / 60000;
     sec = (milliseconds % 60000) / 1000;
@@ -190,33 +192,40 @@ void MainWindow::on_startBtn_clicked() {
   } else {
     ui->startBtn->setText("Stop");
     onCount = true;
-    msTimer->start(1);
+    msTimer->start(10);
+    start_time = std::chrono::system_clock::now();
     connect(msTimer, &QTimer::timeout, this, &MainWindow::timerUpdate);
   }
 }
 
 void MainWindow::timerUpdate() {
   if (timerType == TimerType::timer) {
-    msec--;
-    if (msec < 0) {
-      msec = 999;
-      sec--;
-      if (sec < 0) {
-        sec = 59;
-        min--;
-        if (min < 0) {
-          msec = 0;
-          sec = 0;
-          min = 0;
-          ui->startBtn->setText("Start");
-          msTimer->stop();
-          disconnect(msTimer, &QTimer::timeout, this, &MainWindow::timerUpdate);
-          onCount = false;
-          QMessageBox::information(this, "타이머 종료",
+    // 경과 시간 계산
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start_time);
+
+    // 밀리초 단위로 계산
+    long long left_milliseconds = target_ms-duration.count();
+    if (left_milliseconds<0)
+    {
+      msec = 0;
+      sec = 0;
+      min = 0;
+      ui->startBtn->setText("Start");
+      msTimer->stop();
+      disconnect(msTimer, &QTimer::timeout, this, &MainWindow::timerUpdate);
+      onCount = false;
+      QMessageBox::information(this, "타이머 종료",
                                    "설정한 시간이 완료되었습니다!");
-        }
-      }
     }
+    else
+    {
+      min = left_milliseconds / 60000;
+      sec= (left_milliseconds % 60000) / 1000;
+      msec = left_milliseconds % 1000;
+
+    }
+    timerSetDialog(msec, sec, min);
+
     if (ui->arduinoMode->text() == "MISSION_CREATE") {
       if (min == 0 && sec == 30 && msec == 0) {
         QTimer::singleShot(0, this, []() {
@@ -230,17 +239,16 @@ void MainWindow::timerUpdate() {
         serial->writeDevice(packet);
       }
     }
-    timerSetDialog(msec, sec, min);
   } else if (timerType == TimerType::stopwatch) {
-    msec++;
-    if (msec >= 1000) {
-      msec = 0;
-      sec++;
-      if (sec >= 60) {
-        sec = 0;
-        min++;
-      }
-    }
+
+    // 경과 시간 계산
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - start_time);
+
+    // 밀리초 단위로 계산
+    long long total_milliseconds = duration.count();
+    min = total_milliseconds / 60000;
+    sec= (total_milliseconds % 60000) / 1000;
+    msec = total_milliseconds % 1000;
     timerSetDialog(msec, sec, min);
   }
 }
