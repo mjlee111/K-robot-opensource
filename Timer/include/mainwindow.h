@@ -13,6 +13,7 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <iostream>
+#include <chrono>
 
 #define SERIAL_BAUDRATE 115200
 
@@ -69,5 +70,7 @@ private:
   bool isOpen = false;
 
   bool isModeSet = false;
+  std::chrono::system_clock::time_point start_time ;
+  int target_ms;
 };
 #endif  // MAINWINDOW_H
